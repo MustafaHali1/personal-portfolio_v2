@@ -24,7 +24,7 @@ export const Projects: React.FC<ProjectsProps> = ({ projeler }) => {
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-          {projeler.map((proje) => (
+          {(projeler || []).map((proje) => (
             <div
               key={proje.id}
               className="glass-panel glass-panel-hover rounded-3xl overflow-hidden flex flex-col justify-between transition-all group"

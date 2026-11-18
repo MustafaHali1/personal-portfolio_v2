@@ -22,7 +22,7 @@ export const Footer: React.FC<FooterProps> = ({ profil }) => {
         </div>
 
         <div className="flex items-center gap-3">
-          {profil.sosyalMedya.map((sosyal, i) => (
+          {(profil?.sosyalMedya || []).map((sosyal, i) => (
             <a
               key={i}
               href={sosyal.link}

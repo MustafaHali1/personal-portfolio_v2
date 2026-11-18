@@ -6,8 +6,8 @@ interface PhoneSimulatorProps {
   uygulamalar: TelefonUygulamasi[];
 }
 
-export const PhoneSimulator: React.FC<PhoneSimulatorProps> = ({ uygulamalar }) => {
-  const [seciliUygulama, setSeciliUygulama] = useState<TelefonUygulamasi | null>(uygulamalar[0] || null);
+export const PhoneSimulator: React.FC<PhoneSimulatorProps> = ({ uygulamalar = [] }) => {
+  const [seciliUygulama, setSeciliUygulama] = useState<TelefonUygulamasi | null>(uygulamalar?.[0] || null);
   const [saat, setSaat] = useState<string>('23:45');
 
   useEffect(() => {
@@ -67,7 +67,7 @@ export const PhoneSimulator: React.FC<PhoneSimulatorProps> = ({ uygulamalar }) =
               </div>
 
               <div className="grid grid-cols-2 gap-2 text-[10px]">
-                {uygulamalar.map((app) => {
+                {(uygulamalar || []).map((app) => {
                   const aktif = seciliUygulama?.id === app.id;
                   return (
                     <button

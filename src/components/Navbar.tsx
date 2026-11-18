@@ -50,7 +50,7 @@ export const Navbar: React.FC<NavbarProps> = ({ profil, now }) => {
 
         {/* Right Action Links & Admin */}
         <div className="flex items-center gap-2.5">
-          {profil.sosyalMedya.find(s => s.platform === 'GitHub') && (
+          {profil?.sosyalMedya?.find(s => s.platform === 'GitHub') && (
             <a
               href={profil.sosyalMedya.find(s => s.platform === 'GitHub')?.link}
               target="_blank"

@@ -68,7 +68,7 @@ export const Hero: React.FC<HeroProps> = ({ profil, sutunlar, now }) => {
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-            {sutunlar.map((sutun) => (
+            {(sutunlar || []).map((sutun) => (
               <div
                 key={sutun.id}
                 className="glass-panel glass-panel-hover rounded-2xl p-5 transition-all group"
