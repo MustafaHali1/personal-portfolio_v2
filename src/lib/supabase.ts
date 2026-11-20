@@ -5,25 +5,34 @@ import { varsayilanPortfolyoVerisi } from '../data/defaultData';
 const LOCAL_STORAGE_KEY = 'mustafahali_portfolio_data_v2';
 const SUPABASE_CONFIG_KEY = 'mustafahali_supabase_config_v2';
 
+const temizleUrl = (rawUrl: string): string => {
+  if (!rawUrl) return '';
+  return rawUrl.trim().replace(/\/rest\/v1\/?$/, '').replace(/\/$/, '');
+};
+
 // Local storage'dan veya env'den Supabase yapılandırmasını al
 export const getSupabaseConfig = () => {
   const localConfig = localStorage.getItem(SUPABASE_CONFIG_KEY);
   if (localConfig) {
     try {
-      return JSON.parse(localConfig);
+      const parsed = JSON.parse(localConfig);
+      return {
+        url: temizleUrl(parsed.url || ''),
+        anonKey: (parsed.anonKey || '').trim()
+      };
     } catch (e) {
       // fallback
     }
   }
 
   return {
-    url: import.meta.env.VITE_SUPABASE_URL || '',
-    anonKey: import.meta.env.VITE_SUPABASE_ANON_KEY || ''
+    url: temizleUrl(import.meta.env.VITE_SUPABASE_URL || ''),
+    anonKey: (import.meta.env.VITE_SUPABASE_ANON_KEY || '').trim()
   };
 };
 
 export const saveSupabaseConfig = (url: string, anonKey: string) => {
-  localStorage.setItem(SUPABASE_CONFIG_KEY, JSON.stringify({ url, anonKey }));
+  localStorage.setItem(SUPABASE_CONFIG_KEY, JSON.stringify({ url: temizleUrl(url), anonKey: anonKey.trim() }));
 };
 
 // İstemci oluşturucu
