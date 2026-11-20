@@ -21,3 +21,4 @@ npm run dev
 # Üretim derlemesi
 npm run build
 ```
+# personal-portfolio_v2
